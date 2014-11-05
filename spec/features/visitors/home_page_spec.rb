@@ -4,13 +4,20 @@
 #   So I can learn more about the website
 feature 'Home page' do
 
-  # Scenario: Visit the home page
-  #   Given I am a visitor
-  #   When I visit the home page
-  #   Then I see "Welcome"
-  scenario 'visit the home page' do
-    visit root_path
-    expect(page).to have_content 'Welcome'
+  before do
+    @question = FactoryGirl.create :question, text: 'hey, whats your name kid?'
+  end
+
+  context 'when I vist the home page' do
+
+    before do
+      vist root_path
+    end
+
+    it 'should show me the new answer page' do
+      expect(current_path).to eq new_answer_path(question_id: @question.id)
+    end
+
   end
 
 end
