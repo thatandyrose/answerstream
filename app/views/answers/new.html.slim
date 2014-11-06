@@ -1,0 +1,15 @@
+.jumbotron
+  h1: i.fa.fa-eye
+  h1 = @question.text
+  = form_for [@question, @answer] do |f|
+    = render "shared/error_messages", target: @answer
+    .form-group
+      = f.text_area :text, class: 'form-control'
+    small: .form-group
+      = f.label :name, 'Your name?'
+      = f.text_field :name, class: 'form-control input-sm'
+      span.help-block this is optional
+    = f.submit 'Save answer', class: 'btn btn-default btn-lg'
+  
+  hr
+  = render "quote"

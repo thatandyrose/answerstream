@@ -1,0 +1,17 @@
+.jumbotron
+  h1: i.fa.fa-eye
+  h1 = @question.text
+  - @answers.each do |answer|
+    h3
+      i.fa.fa-dot-circle-o
+      |  #{answer.text}
+    
+    small #{answer.name.present? ? answer.name : 'anonymous'} #{time_ago_in_words(answer.created_at)} ago
+  
+  hr
+  = render "quote"
+
+  hr
+  small: a href='#{new_question_answer_path(@question)}'
+    i.fa.fa-arrow-circle-o-left
+    |  new answer

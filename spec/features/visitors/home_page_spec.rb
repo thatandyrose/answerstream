@@ -11,11 +11,11 @@ feature 'Home page' do
   context 'when I vist the home page' do
 
     before do
-      vist root_path
+      visit root_path
     end
 
     it 'should show me the new answer page' do
-      expect(current_path).to eq new_answer_path(question_id: @question.id)
+      expect(current_path).to eq new_question_answer_path(@question)
     end
 
   end

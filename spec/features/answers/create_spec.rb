@@ -7,19 +7,19 @@ feature 'Create Answers' do
   context 'when I vist new answer' do
 
     before do
-      vist new_answer_path
+      visit new_answer_path
     end
 
     it 'should show me a question' do
       expect(page).to have_content 'hey, whats your name kid?'
-      expect(current_path).to eq new_answer_path(question_id: @question.id)
+      expect(current_path).to eq new_question_answer_path(@question)
     end
 
     it 'should allow me to answer the question' do
       fill_in :answer_text, with: 'well Im andy'
-      click_on 'I have sinned'
+      click_on 'Save answer'
 
-      expect(current_path).to eq answers_path
+      expect(current_path).to eq question_answers_path(@question)
       expect(page).to have_content 'well Im andy'
       expect(page).to have_content 'anonymous'
 
@@ -32,9 +32,9 @@ feature 'Create Answers' do
     it 'should allow me to answer the question with a name' do
       fill_in :answer_text, with: 'well Im andy'
       fill_in :answer_name, with: 'bob'
-      click_on 'I have sinned'
+      click_on 'Save answer'
 
-      expect(current_path).to eq answers_path
+      expect(current_path).to eq question_answers_path(@question)
       expect(page).to have_content 'well Im andy'
       expect(page).to have_content 'bob'
 
@@ -46,13 +46,12 @@ feature 'Create Answers' do
     end
 
     it 'should validate answer text' do
-      click_on 'I have sinned'
+      click_on 'Save answer'
 
-      expect(page).to have_content "You didn't tell us what your sin was"
+      expect(page).to have_content "You haven't answered the question yet"
       expect(Answer.count).to eq 0
 
       expect(page).to have_content 'hey, whats your name kid?'
-      expect(current_path).to eq new_answer_path
     end
 
   end
