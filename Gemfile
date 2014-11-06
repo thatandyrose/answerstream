@@ -14,6 +14,7 @@ gem 'pg'
 gem 'slim-rails'
 gem 'thin'
 gem 'font-awesome-rails'
+gem 'rails_12factor', group: :production
 
 group :development do
   gem 'better_errors'
